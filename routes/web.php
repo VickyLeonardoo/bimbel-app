@@ -7,8 +7,14 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\VisiMisiController;
 use App\Http\Controllers\EducationController;
+use App\Http\Controllers\Front\ChildrenController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\Front\DashboardController;
+use App\Http\Controllers\Front\TransactionController;
+use App\Http\Controllers\PromoController;
+use App\Http\Controllers\TransactionController as ControllersTransactionController;
+
+Route::post('/check-promo', [PromoController::class, 'checkPromo'])->name('check-promo');
 
 Route::get('/', function () {
     return view('welcome');
@@ -35,8 +41,11 @@ Route::middleware('auth')->group(function () {
     
     Route::resource('visi-misi', VisiMisiController::class)
     ->middleware(['role:admin']);
-
+ 
     Route::resource('year', YearController::class)
+    ->middleware(['role:admin']);
+
+    Route::resource('transaction', ControllersTransactionController::class)
     ->middleware(['role:admin']);
 
     Route::put('/discount/status/{discount:id}',[DiscountController::class, 'status'])->name('discount.status')->middleware(['role:admin']);
@@ -49,8 +58,15 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('client')->name('client.')->group(function () {
 
-        Route::get('/dashboard',[DashboardController::class, 'index'])->name('front.dashboard')->middleware(['role:client']);
-        
+        Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard')->middleware(['role:client']);
+
+        Route::resource('children',ChildrenController::class)
+        ->middleware(['role:client']);
+
+        Route::resource('transaction', TransactionController::class)
+        ->middleware(['role:client']);
+
+
         // Route::put('/transaction/cancel/{transaction:id}',[UserTransactionController::class,'set_cancel'])
         // ->middleware('role:parent')
         // ->name('transaction.cancel');

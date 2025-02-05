@@ -1,12 +1,12 @@
 <x-app-layout>
     <div class="container mx-auto px-4 sm:px-8 py-12">
         @if($errors->any())
-                @foreach($errors->all() as $error)
-                    <div class="py-3 w-full bg-red-500 text-white font-bold mb-3">
-                        <p class="ml-3">{{$error}}</p>
-                    </div>
-                @endforeach
-            @endif
+            @foreach($errors->all() as $error)
+                <div class="py-3 w-full bg-red-500 text-white font-bold mb-3">
+                    <p class="ml-3">{{$error}}</p>
+                </div>
+            @endforeach
+        @endif
         {{-- <div class="max-w-2xl mx-auto bg-white shadow-xl rounded-lg p-8"> --}}
         <div class="mx-auto bg-white shadow-xl rounded-lg p-8">
             <h2 class="text-2xl font-bold text-indigo-600 mb-6 text-center">Create New Discount</h2>

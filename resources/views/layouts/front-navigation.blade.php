@@ -21,11 +21,14 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     @endauth
-                    <x-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.*')">
-                        {{ __('Courses') }}
+                    <x-nav-link :href="route('client.children.index')" :active="request()->routeIs('client.children.*')">
+                        {{ __('Children Information') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('client.transaction.index')" :active="request()->routeIs('client.transaction.*')">
+                        {{ __('Transaction') }}
                     </x-nav-link>
                     <x-nav-link :href="route('instructor.index')" :active="request()->routeIs('instructor.*')">
-                        {{ __('Instructor') }}
+                        {{ __('Attending') }}
                     </x-nav-link>
                 </div>
             </div>
