@@ -12,16 +12,23 @@ use Illuminate\Http\Request;
 use App\Models\TransactionItem;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreTransactionRequest;
+use App\Http\Requests\ClientUpdateTransactionRequest;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use League\CommonMark\Extension\SmartPunct\EllipsesParser;
 
 class TransactionController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $transactions = Transaction::all();
+        $transactions = Transaction::where('user_id',auth()->user()->id)->paginate(10);
+        // $transactions = Transaction::all();
         return view('frontend.transaction.index',compact('transactions'));
     }
 
@@ -61,13 +68,17 @@ class TransactionController extends Controller
             
             $totalAmount = 0;
             $discount_amount = 0;
-            if ($discount->type == 'percent') {
-                $totalAmount = $amount * $discount->total / 100;
-                $discount_amount = $amount - $totalAmount;
-
-            } else {
-                $totalAmount -= $amount - $discount->total;
-                $discount_amount = $discount->total;
+            if ($discount) {
+                if ($discount->type == 'percent') {
+                    $totalAmount = $amount * $discount->total / 100;
+                    $discount_amount = $amount - $totalAmount;
+    
+                } else {
+                    $totalAmount -= $amount - $discount->total;
+                    $discount_amount = $discount->total;
+                }
+            }else{
+                $totalAmount = $amount;
             }
             // Create transaction
             $transaction = Transaction::create([
@@ -173,6 +184,7 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
+        $this->authorize('view', $transaction);
         return view('frontend.transaction.show',compact('transaction'));
     }
 
@@ -187,9 +199,30 @@ class TransactionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update(ClientUpdateTransactionRequest $request, Transaction $transaction)
     {
-        //
+        $validate = $request->validated();
+
+        if ($transaction->payment_image) {
+            Storage::disk('public')->delete($transaction->payment_image);
+        }
+
+        $imagePath = $request->file('payment_image')->store('payment-image', 'public');
+        $validate['payment_image'] = $imagePath;
+        $transaction->update([
+            'payment_image' => $validate['payment_image']
+        ]);
+
+// Suggested code may be subject to a license. Learn more: ~LicenseLog:2699959546.
+        return redirect()->back()->with('success','Transaction Updated Successfully!');
+
+    }
+
+    public function set_pending(Transaction $transaction){
+        $transaction->update([
+            'status' => 'Pending'
+        ]);
+        return redirect()->back()->with('success','Transaction updated successfully!');
     }
 
     /**

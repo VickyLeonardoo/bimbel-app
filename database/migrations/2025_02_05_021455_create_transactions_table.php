@@ -18,12 +18,12 @@ return new class extends Migration
             $table->string('transaction_no');
             $table->integer('amount'); 
             $table->foreignId('discount_id')->nullable()->constrained();
-            $table->float('discount_amount',15,2)->nullable();
+            $table->float('discount_amount',15,2)->nullable(); 
             $table->text('payment_image')->nullable();
-            $table->enum('status',['Draft','Pending','Payment Receive','canceled'])->default('Draft');
+            $table->enum('status',['Draft','Pending','Payment Receive','Canceled'])->default('Draft');
             $table->boolean('is_active')->default(true);
             $table->softDeletes();
-            $table->timestamps();
+            $table->timestamps(); 
         });
     }
 

@@ -100,7 +100,7 @@
                                                 <span
                                                     class="px-3 py-1 inline-flex items-center text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
                                                     <span class="w-2 h-2 mr-1.5 rounded-full bg-red-600"></span>
-                                                    Draft
+                                                    Cancelled
                                                 </span>
                                             @endif
                                         </td>

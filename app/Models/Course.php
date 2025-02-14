@@ -11,6 +11,9 @@ class Course extends Model
 
     protected $guarded = ['id'];
 
+    public function course_session(){
+        return $this->hasMany(SessionCourse::class);
+    }
 
 
     

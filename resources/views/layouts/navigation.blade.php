@@ -3,7 +3,7 @@
     
     <div class="container mx-auto px-4 sm:px-8">
         <div class="flex justify-between h-16">
-            <div class="flex">
+            <div class="flex w-full">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
@@ -11,7 +11,7 @@
                     </a>
                 </div>
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:flex flex-1 justify-center">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
@@ -30,8 +30,18 @@
                     <x-nav-link :href="route('discount.index')" :active="request()->routeIs('discount.*')">
                         {{ __('Discount') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('transaction.index')" :active="request()->routeIs('transaction.*')">
+                        {{ __('Transaction') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('enrollments.index')" :active="request()->routeIs('enrollments.*')">
+                        {{ __('Enrollment') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('transaction.index')" :active="request()->routeIs()">
+                        {{ __('Attending') }}
+                    </x-nav-link>
                 </div>
             </div>
+            
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">

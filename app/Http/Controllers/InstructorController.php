@@ -95,9 +95,16 @@ class InstructorController extends Controller
      */
     public function show(Instructor $instructor)
     {
-        return view('instructor.show',compact('instructor'));
-    }
+        $nextInstructor = Instructor::where('id', '>', $instructor->id)
+                                ->orderBy('id', 'asc')
+                                ->first();
+                                
+        $previousInstructor = Instructor::where('id', '<', $instructor->id)
+                                    ->orderBy('id', 'desc')
+                                    ->first();
 
+        return view('instructor.show', compact('instructor', 'nextInstructor', 'previousInstructor'));
+    }
     /**
      * Show the form for editing the specified resource.
      */

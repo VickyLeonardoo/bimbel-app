@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\VisiMisiController;
 use App\Http\Controllers\EducationController;
+use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\Front\ChildrenController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\Front\DashboardController;
@@ -33,6 +34,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/course/{course:id}/session',[CourseController::class, 'session'])
+    ->middleware(['role:admin'])
+    ->name('courses.session');
+
+    Route::post('/course/{course:id}/session',[CourseController::class, 'session_store'])
+    ->middleware(['role:admin'])
+    ->name('courses.session.store');
+
     Route::resource('courses', CourseController::class) 
     ->middleware(['role:admin']);
 
@@ -45,6 +54,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('year', YearController::class)
     ->middleware(['role:admin']);
 
+    Route::patch('/transaction/{transaction:id}/reject',[ControllersTransactionController::class, 'reject'])->name('transaction.reject');
+    Route::patch('/transaction/{transaction:id}/approve',[ControllersTransactionController::class, 'approve'])->name('transaction.approve');
+
     Route::resource('transaction', ControllersTransactionController::class)
     ->middleware(['role:admin']);
 
@@ -56,12 +68,17 @@ Route::middleware('auth')->group(function () {
     Route::post('/instructor/{instructor:id}/education', [EducationController::class, 'store'])->name('instructor.education.store')->middleware(['role:admin']);
     Route::delete('/education/{education:id}', [EducationController::class, 'destroy'])->name('instructor.education.destroy')->middleware(['role:admin']);
 
+    Route::resource('enrollments',EnrollmentController::class)
+    ->middleware(['role:admin']);
+
     Route::prefix('client')->name('client.')->group(function () {
-
+        
         Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard')->middleware(['role:client']);
-
+        
         Route::resource('children',ChildrenController::class)
         ->middleware(['role:client']);
+        
+        Route::patch('/transaction/{transaction:id}/pending', [TransactionController::class, 'set_pending'])->name('transaction.pending');
 
         Route::resource('transaction', TransactionController::class)
         ->middleware(['role:client']);

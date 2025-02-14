@@ -10,4 +10,20 @@ class Enrollment extends Model
     use SoftDeletes;
 
     protected $guarded = ['id'];
+
+    public function transaction(){
+        return $this->belongsTo(Transaction::class);
+    }
+
+    public function course(){
+        return $this->belongsTo(Course::class);
+    }
+
+    public function year(){
+        return $this->belongsTo(Year::class);
+    }
+
+    public function children(){
+        return $this->belongsTo(Children::class);
+    }
 }
