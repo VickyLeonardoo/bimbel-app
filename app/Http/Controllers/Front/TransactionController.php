@@ -47,17 +47,20 @@ class TransactionController extends Controller
      */
     public function store(StoreTransactionRequest $request)
     {
+        $validated = $request->validated();
+        $errorMessages = $this->validateEnrollments($validated);
+        if (!empty($errorMessages)) {
+            return redirect()->back()->with('error', implode(' ', $errorMessages));
+        }
+
         try {
             DB::beginTransaction();
             
-            $validated = $request->validated();
             $discount = $this->handlePromoCode($validated['promo_code'] ?? null);
             
             // Validate enrollments first
-            $errorMessages = $this->validateEnrollments($validated);
-            if (!empty($errorMessages)) {
-                return redirect()->back()->with('error', implode(' ', $errorMessages));
-            }
+           
+            
 
             // Generate transaction number
             $transactionNo = $this->generateTransactionNumber();
@@ -88,7 +91,7 @@ class TransactionController extends Controller
                 'amount' => $totalAmount,
                 'discount_id' => $discount ? $discount->id : null,
                 'discount_amount' => $discount_amount,
-            ]);
+            ]); 
 
             // Create transaction items in bulk
             $this->createTransactionItems($transaction, $validated['child_id'], $courses);

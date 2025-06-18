@@ -9,6 +9,7 @@
                     </div>
                 @endforeach
             @endif
+            {{-- @dd(session('error')) --}}
             @if(session('error'))
                 <div id="success-alert" class="relative mb-6">
                     <div class="p-4 rounded-lg bg-red-50 border border-red-200 shadow-sm">

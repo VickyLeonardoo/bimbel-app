@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="container mx-auto px-4 sm:px-8 py-8">
-        <!-- Status Messages -->
+        <!-- Status Messages --> 
         @if (session('success'))
             <div id="success-alert" class="relative mb-6">
                 <div class="p-4 rounded-lg bg-green-50 border border-green-200 shadow-sm">
@@ -24,6 +24,7 @@
                     </div>
                 </div>
             </div>
+        
         @endif
         @if($transaction->reason)
         <div id="success-alert" class="relative mb-6">
