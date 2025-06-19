@@ -16,7 +16,5 @@ class Course extends Model
     }
 
 
-    
-
 
 }

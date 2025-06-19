@@ -36,7 +36,7 @@
                     <x-nav-link :href="route('enrollments.index')" :active="request()->routeIs('enrollments.*')">
                         {{ __('Enrollment') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('transaction.index')" :active="request()->routeIs()">
+                    <x-nav-link :href="route('attendance.index')" :active="request()->routeIs('attendance.*')">
                         {{ __('Attending') }}
                     </x-nav-link>
                 </div>

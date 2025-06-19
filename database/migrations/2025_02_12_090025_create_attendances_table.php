@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('year_id')->constrained();
             $table->boolean('is_active')->default(true);
             $table->text('reason')->nullable();
-            $table->string('grade'); 
+            $table->string('grade');  
             $table->softDeletes();
             $table->timestamps();
         });

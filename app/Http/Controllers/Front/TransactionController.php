@@ -137,7 +137,7 @@ class TransactionController extends Controller
 
         foreach ($existingEnrollments as $enrollment) {
             $child = $children->firstWhere('id', $enrollment->children_id);
-            $errorMessages[] = "Course already exists for child Name {$child->name} in this year.";
+            $errorMessages[] = "Siswa {$child->name} telah terdaftar dalam kelas pada tahun ini.";
         }
 
         return $errorMessages;

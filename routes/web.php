@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\YearController;
 use App\Http\Controllers\CourseController;
@@ -71,6 +72,21 @@ Route::middleware('auth')->group(function () {
     Route::resource('enrollments',EnrollmentController::class)
     ->middleware(['role:admin']);
 
+    Route::resource('attendance',AttendanceController::class)
+    ->middleware(['role:admin|instructor']);
+
+    Route::post('/attending/update-status',[AttendanceController::class, 'update_status'])
+    ->middleware(['role:admin'])
+    ->name('attendance.update.status');
+
+    Route::post('/attending/update-status',[AttendanceController::class, 'update_status'])
+    ->middleware(['role:admin'])
+    ->name('attendance.update.status');
+    
+    Route::get('/attendance/{course:id}/report', [AttendanceController::class, 'show_report'])
+    ->name('attendance.report');
+
+
     Route::prefix('client')->name('client.')->group(function () {
         
         Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard')->middleware(['role:client']);
@@ -82,6 +98,7 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('transaction', TransactionController::class)
         ->middleware(['role:client']);
+
 
 
         // Route::put('/transaction/cancel/{transaction:id}',[UserTransactionController::class,'set_cancel'])
