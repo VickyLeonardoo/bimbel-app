@@ -44,8 +44,9 @@ class AttendanceController extends Controller
         $classes = [
             1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
         ];
+        
         // Ambil tahun aktif
-        $current_date = date('');
+        $current_date = date('Y-m-d');
         $activeYear = Year::firstOrFail();
         $year_id = $request->get('year_id', $activeYear->id);
         $ses_id = $request->get('session_course_id');
@@ -54,20 +55,42 @@ class AttendanceController extends Controller
         // Ambil kursus dengan eager loading 'sessions' dan 'year'
         $course = Course::with(['course_session' => function($query) use ($year_id) {
             $query->where('year_id', $year_id);
-        }, 'course_session.year']) // Eager load 'year' for sessions
+        }, 'course_session.year'])
                         ->where('id', $id)
                         ->firstOrFail();
-                        
+
+        // Get all courses for navigation (same order as index)
+        $allCourses = Course::orderBy('id')->get();
+        $currentIndex = $allCourses->search(function($item) use ($id) {
+            return $item->id == $id;
+        });
+
+        // Find previous and next courses
+        $previousCourse = $currentIndex > 0 ? $allCourses[$currentIndex - 1] : null;
+        $nextCourse = $currentIndex < $allCourses->count() - 1 ? $allCourses[$currentIndex + 1] : null;
+
         return view('attending.show', [
             'title' => 'Attendee List',
             'sessions' => $course->course_session,
             'years' => Year::all(),
             'course' => $course,
             'selected_year' => $year_id,
-            'attendees' => Attendance::where('session_course_id', $request->get('session_course_id'))->where('year_id', $year_id)->where('grade', $class)->where('is_active',true)->with('children')->get(),
+            'attendees' => Attendance::where('session_course_id', $request->get('session_course_id'))
+                                    ->where('year_id', $year_id)
+                                    ->where('grade', $class)
+                                    ->where('is_active', true)
+                                    ->with('children')
+                                    ->get(),
             'selected_session' => $ses_id,
             'classes' => $classes,
             'selected_class' => $class,
+            'previousCourse' => $previousCourse,
+            'nextCourse' => $nextCourse,
+            'currentFilters' => [
+                'year_id' => $year_id,
+                'session_course_id' => $ses_id,
+                'class' => $class
+            ]
         ]);
     }
 

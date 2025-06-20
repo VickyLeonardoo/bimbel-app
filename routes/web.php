@@ -15,6 +15,9 @@ use App\Http\Controllers\Front\DashboardController;
 use App\Http\Controllers\Front\TransactionController;
 use App\Http\Controllers\PromoController;
 use App\Http\Controllers\TransactionController as ControllersTransactionController;
+use App\Http\Controllers\DashboardController as ControllersDashboardController;
+
+
 
 Route::post('/check-promo', [PromoController::class, 'checkPromo'])->name('check-promo');
 
@@ -26,9 +29,12 @@ Route::get('/about-us', function () {
     return view('about');
 })->name('about');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+// Suggested code may be subject to a license. Learn more: ~LicenseLog:357993683.
+Route::get('/dashboard',[ControllersDashboardController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

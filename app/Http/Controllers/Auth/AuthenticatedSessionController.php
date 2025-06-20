@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         if (auth()->user()->hasRole('admin|instructor')) {
-            return redirect()->intended(route('dashboard', absolute: false));
+            return redirect()->intended(route('dashboard', absolute: false))->with('success','Login berhasil');
         }else{
             return redirect()->intended(route('client.transaction.index', absolute: false));
 

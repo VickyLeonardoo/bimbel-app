@@ -115,7 +115,7 @@
             <div class="px-6 py-4 border-b border-gray-200">
                 <div class="flex justify-between items-center">
                     <div>
-                        <h1 class="text-2xl font-semibold text-gray-900">Transaction Details</h1>
+                        <h1 class="text-2xl font-semibold text-gray-900">Detail Transaksi</h1>
                         <p class="text-sm text-gray-600 mt-1">Transaction No: {{ $transaction->transaction_no }}</p>
                     </div>
                     <div class="flex items-center gap-3">
@@ -196,15 +196,15 @@
             <div class="px-6 py-4">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
-                        <h3 class="text-sm font-medium text-gray-500">Academic Year</h3>
+                        <h3 class="text-sm font-medium text-gray-500">Tahun Ajaran</h3>
                         <p class="mt-1 text-sm text-gray-900">{{ $transaction->year->name }}</p>
                     </div>
                     <div>
-                        <h3 class="text-sm font-medium text-gray-500">Transaction Date</h3>
+                        <h3 class="text-sm font-medium text-gray-500">Tanggal Transaksi</h3>
                         <p class="mt-1 text-sm text-gray-900">{{ $transaction->created_at->format('d M Y H:i') }}</p>
                     </div>
                     <div>
-                        <h3 class="text-sm font-medium text-gray-500">Total Amount</h3>
+                        <h3 class="text-sm font-medium text-gray-500">Jumlah Pembayaran</h3>
                         <p class="mt-1 text-lg font-semibold text-gray-900">
                             Rp {{ number_format($transaction->amount, 0, ',', '.') }}
                         </p>
@@ -216,7 +216,7 @@
         <!-- Payment Proof Section -->
         <div class="bg-white rounded-lg shadow-sm mb-6">
             <div class="px-6 py-4 border-b border-gray-200">
-                <h2 class="text-lg font-medium text-gray-900">Payment Proof</h2>
+                <h2 class="text-lg font-medium text-gray-900">Bukti Pembayaran</h2>
             </div>
             <div class="px-6 py-4">
                 @if ($transaction->status == 'Draft')
@@ -330,7 +330,7 @@
         <!-- Transaction Items -->
         <div class="bg-white rounded-lg shadow-sm">
             <div class="px-6 py-4 border-b border-gray-200">
-                <h2 class="text-lg font-medium text-gray-900">Registered Courses</h2>
+                <h2 class="text-lg font-medium text-gray-900">Kelas yang Dibeli</h2>
             </div>
             <div class="px-6 py-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

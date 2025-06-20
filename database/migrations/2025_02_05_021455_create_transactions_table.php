@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('year_id')->constrained();
-            $table->string('transaction_no');
+            $table->string('transaction_no'); 
             $table->integer('amount'); 
             $table->foreignId('discount_id')->nullable()->constrained();
             $table->float('discount_amount',15,2)->nullable(); 

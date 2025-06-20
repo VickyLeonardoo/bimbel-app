@@ -14,7 +14,7 @@ class TransactionController extends Controller
 
     public function index(Request $request)
     {
-        $transactions = Transaction::where('status','Pending')->paginate(1);
+        $transactions = Transaction::whereIn('status',['Pending','Payment Receive'])->orderBy('created_at','desc')->paginate(10);
         return view('transaction.index',compact('transactions'));
     }
 

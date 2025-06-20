@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreChildrenRequest;
 use App\Http\Requests\UpdateChildrenRequest;
 use Illuminate\Http\Request;
-use App\Models\Children; 
+use App\Models\Children;
+use App\Models\TransactionItem;
 
 class ChildrenController extends Controller
 {
@@ -99,7 +100,6 @@ class ChildrenController extends Controller
      */
     public function edit(Children $child)
     {
-        return $child;
         return view('frontend.child.edit', compact('child'));
     }
 
@@ -117,6 +117,8 @@ class ChildrenController extends Controller
             'school' => $validate['school'],
             'grade' => $validate['grade'],
         ]);
+
+        return redirect()->route('client.children.index')->with('success','Data anak berhasil diubah');
     }
 
     /**
@@ -124,6 +126,10 @@ class ChildrenController extends Controller
      */
     public function destroy(Children $child)
     {
+        $check_children = TransactionItem::where('children_id',$child->id)->first();
+        if ($check_children) {
+            return redirect()->back()->with('error','Data anak tidak bisa dihapus karena ada transaksi yang terkait');
+        } 
         $child->delete();
         return redirect()->route('client.children.index')->with('success','Data anak berhasil dihapus');
     }

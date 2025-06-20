@@ -339,6 +339,233 @@
             </div>
         </section>
 
+        <!-- Section Testimoni -->
+        <section id="testimoni" class="py-24 bg-gradient-to-br from-purple-50 to-pink-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">Testimoni Siswa</h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">Dengarkan pengalaman siswa-siswa yang telah merasakan bimbingan belajar kami.</p>
+                </div>
+
+                <!-- Carousel Container -->
+                <div x-data="testimonialCarousel()" x-init="startAutoplay()" class="relative max-w-6xl mx-auto">
+                    <!-- Testimonial Cards -->
+                    <div class="overflow-hidden rounded-2xl">
+                        <div class="flex transition-transform duration-500 ease-in-out" :style="`transform: translateX(-${currentIndex * 100}%)`">
+                            <!-- Slide 1 -->
+                            <div class="w-full flex-shrink-0 px-4">
+                                <div class="grid md:grid-cols-2 gap-8">
+                                    <!-- Testimonial 1 -->
+                                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                                        <div class="flex items-center mb-6">
+                                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
+                                                AS
+                                            </div>
+                                            <div>
+                                                <h4 class="text-xl font-semibold text-gray-800">Andi Setiawan</h4>
+                                                <div class="flex text-yellow-400 mt-1">
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="text-gray-600 italic">"Bimbel Pintar benar-benar membantu saya memahami matematika dengan lebih mudah. Pengajarnya sabar dan metode pembelajarannya sangat efektif. Nilai saya meningkat drastis!"</p>
+                                    </div>
+
+                                    <!-- Testimonial 2 -->
+                                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                                        <div class="flex items-center mb-6">
+                                            <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-red-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
+                                                SP
+                                            </div>
+                                            <div>
+                                                <h4 class="text-xl font-semibold text-gray-800">Sari Permata</h4>
+                                                <div class="flex text-yellow-400 mt-1">
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="text-gray-600 italic">"Kelas privat di sini sangat membantu. Pengajar fokus pada kelemahan saya dan memberikan latihan yang tepat. Sekarang saya lebih percaya diri menghadapi ujian."</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Slide 2 -->
+                            <div class="w-full flex-shrink-0 px-4">
+                                <div class="grid md:grid-cols-2 gap-8">
+                                    <!-- Testimonial 3 -->
+                                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                                        <div class="flex items-center mb-6">
+                                            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
+                                                RP
+                                            </div>
+                                            <div>
+                                                <h4 class="text-xl font-semibold text-gray-800">Rizki Pratama</h4>
+                                                <div class="flex text-yellow-400 mt-1">
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="text-gray-600 italic">"Try out rutin di Bimbel Pintar sangat membantu persiapan UTBK saya. Soal-soalnya berkualitas dan pembahasannya detail. Alhamdulillah lulus PTN impian!"</p>
+                                    </div>
+
+                                    <!-- Testimonial 4 -->
+                                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                                        <div class="flex items-center mb-6">
+                                            <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-yellow-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
+                                                DM
+                                            </div>
+                                            <div>
+                                                <h4 class="text-xl font-semibold text-gray-800">Desi Maharani</h4>
+                                                <div class="flex text-yellow-400 mt-1">
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="text-gray-600 italic">"Jadwal belajar yang fleksibel sangat cocok untuk saya yang sibuk dengan ekstrakurikuler. Pengajarnya juga ramah dan mudah dihubungi. Recommended banget!"</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Slide 3 -->
+                            <div class="w-full flex-shrink-0 px-4">
+                                <div class="grid md:grid-cols-2 gap-8">
+                                    <!-- Testimonial 5 -->
+                                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                                        <div class="flex items-center mb-6">
+                                            <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
+                                                FH
+                                            </div>
+                                            <div>
+                                                <h4 class="text-xl font-semibold text-gray-800">Fajar Hidayat</h4>
+                                                <div class="flex text-yellow-400 mt-1">
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="text-gray-600 italic">"Materi fisika dan kimia yang sulit jadi lebih mudah dipahami berkat metode pembelajaran di sini. Pengajarnya kompeten dan selalu siap membantu."</p>
+                                    </div>
+
+                                    <!-- Testimonial 6 -->
+                                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                                        <div class="flex items-center mb-6">
+                                            <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
+                                                LN
+                                            </div>
+                                            <div>
+                                                <h4 class="text-xl font-semibold text-gray-800">Luna Nabila</h4>
+                                                <div class="flex text-yellow-400 mt-1">
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="text-gray-600 italic">"Bimbel Pintar tidak hanya meningkatkan nilai akademik saya, tapi juga membangun kepercayaan diri. Lingkungan belajarnya nyaman dan mendukung."</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Dots -->
+                    <div class="flex justify-center mt-8 space-x-2">
+                        <template x-for="(slide, index) in slides" :key="index">
+                            <button @click="goToSlide(index)" 
+                                    :class="currentIndex === index ? 'bg-blue-500' : 'bg-gray-300'"
+                                    class="w-3 h-3 rounded-full transition-colors duration-300 hover:bg-blue-400">
+                            </button>
+                        </template>
+                    </div>
+
+                    <!-- Navigation Arrows -->
+                    <button @click="prevSlide()" 
+                            class="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 text-gray-600 hover:text-blue-500">
+                        <i data-feather="chevron-left" class="h-6 w-6"></i>
+                    </button>
+                    <button @click="nextSlide()" 
+                            class="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 text-gray-600 hover:text-blue-500">
+                        <i data-feather="chevron-right" class="h-6 w-6"></i>
+                    </button>
+                </div>
+
+                <!-- Call to Action Button -->
+                <div class="text-center mt-12" data-aos="fade-up">
+                    <button class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                        Lihat Semua Ulasan
+                        <i data-feather="arrow-right" class="inline h-5 w-5 ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <script>
+                function testimonialCarousel() {
+                    return {
+                        currentIndex: 0,
+                        slides: [0, 1, 2], // 3 slides total
+                        autoplayInterval: null,
+
+                        startAutoplay() {
+                            this.autoplayInterval = setInterval(() => {
+                                this.nextSlide();
+                            }, 5000); // Ganti slide setiap 5 detik
+                        },
+
+                        stopAutoplay() {
+                            if (this.autoplayInterval) {
+                                clearInterval(this.autoplayInterval);
+                            }
+                        },
+
+                        nextSlide() {
+                            this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+                        },
+
+                        prevSlide() {
+                            this.currentIndex = this.currentIndex === 0 ? this.slides.length - 1 : this.currentIndex - 1;
+                        },
+
+                        goToSlide(index) {
+                            this.currentIndex = index;
+                            this.stopAutoplay();
+                            // Restart autoplay after manual navigation
+                            setTimeout(() => {
+                                this.startAutoplay();
+                            }, 3000);
+                        }
+                    }
+                }
+
+                // Initialize feather icons when the component loads
+                document.addEventListener('DOMContentLoaded', function() {
+                    setTimeout(() => {
+                        feather.replace();
+                    }, 100);
+                });
+            </script>
+        </section>
+
         <!-- Contact Section dengan Modern Cards -->
         <section id="kontak" class="py-24 bg-white">
             <div class="container mx-auto px-4">

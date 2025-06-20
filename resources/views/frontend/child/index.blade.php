@@ -34,6 +34,40 @@
                         </div>
                     </div>
                 </div>
+
+                @elseif(session('error'))
+                <div id="success-alert" class="relative mb-6">
+                    <div class="p-4 rounded-lg bg-red-50 border border-red-200 shadow-sm">
+                        <div class="flex items-center gap-4">
+                            <!-- Success Icon -->
+                            <div class="flex-shrink-0">
+                                <svg class="h-5 w-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            
+                            <!-- Alert Content -->
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm font-medium text-red-800">
+                                            Gagal!
+                                        </p>
+                                        <p class="mt-1 text-sm text-red-700">
+                                            {{ session('error') }}
+                                        </p>
+                                    </div>
+                                    <!-- Close Button -->
+                                    <button type="button" onclick="closeAlert()" class="self-center p-1.5 hover:bg-red-100 rounded-full transition-colors duration-200">
+                                        <svg class="h-5 w-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @endif
             <!-- Header Section -->
             <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8">

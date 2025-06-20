@@ -1,9 +1,77 @@
 <x-app-layout>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <!-- Page Header -->
+        <!-- Page Header with Navigation -->
         <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">{{ $course->name }}</h1>
-            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">Manage your attendance student</p>
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white">{{ $course->name }}</h1>
+                    <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">Manage your attendance student</p>
+                </div>
+                
+                <!-- Navigation Controls -->
+                <div class="flex items-center space-x-4">
+                    <!-- Back to Index -->
+                    <a href="{{ route('attendance.index') }}" 
+                       class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                        </svg>
+                        Back to List
+                    </a>
+                    
+                    <!-- Previous Course -->
+                    @if($previousCourse)
+                        <a href="{{ route('attendance.show', $previousCourse->id) }}{{ request()->getQueryString() ? '?' . request()->getQueryString() : '' }}" 
+                           class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+                           title="Previous: {{ $previousCourse->name }}">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                            Previous
+                        </a>
+                    @else
+                        <button disabled class="inline-flex items-center px-4 py-2 bg-gray-300 text-gray-500 rounded-lg font-medium cursor-not-allowed">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                            Previous
+                        </button>
+                    @endif
+                    
+                    <!-- Next Course -->
+                    @if($nextCourse)
+                        <a href="{{ route('attendance.show', $nextCourse->id) }}{{ request()->getQueryString() ? '?' . request()->getQueryString() : '' }}" 
+                           class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+                           title="Next: {{ $nextCourse->name }}">
+                            Next
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    @else
+                        <button disabled class="inline-flex items-center px-4 py-2 bg-gray-300 text-gray-500 rounded-lg font-medium cursor-not-allowed">
+                            Next
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    @endif
+                </div>
+            </div>
+            
+            <!-- Course Navigation Info -->
+            <div class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                @if($previousCourse || $nextCourse)
+                    <div class="flex items-center space-x-4">
+                        @if($previousCourse)
+                            <span>← Previous: <span class="font-medium">{{ $previousCourse->name }}</span></span>
+                        @endif
+                        @if($nextCourse)
+                            <span>Next: <span class="font-medium">{{ $nextCourse->name }}</span> →</span>
+                        @endif
+                    </div>
+                @endif
+            </div>
         </div>
 
         <!-- Alert Messages -->
