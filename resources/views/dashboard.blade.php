@@ -61,11 +61,16 @@
                                 </svg>
                             </div>
                             <div class="text-right">
-                                <div class="text-xs text-green-500 font-semibold flex items-center">
+                                <div class="text-xs font-semibold flex items-center
+                                    {{ $student_change_percentage >= 0 ? 'text-green-500' : 'text-red-500' }}">
                                     <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                                        @if($student_change_percentage >= 0)
+                                            <path fill-rule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                                        @else
+                                            <path fill-rule="evenodd" d="M16.707 14.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 011.414-1.414L9 18.586V7a1 1 0 112 0v11.586l4.293-4.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        @endif
                                     </svg>
-                                    +12%
+                                    {{ number_format($student_change_percentage, 2) }}%
                                 </div>
                             </div>
                         </div>
@@ -161,7 +166,7 @@
                 </div>
             </div>
 
-            @role('Admin')
+            @role('admin')
             <!-- Enhanced Recent Applications -->
             <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700">
                 <div class="p-8 border-b border-gray-200 dark:border-gray-700">
@@ -207,7 +212,7 @@
                                             {{ $transaction->user->name }}
                                         </p>
                                         <p class="text-sm text-gray-600 dark:text-gray-400">
-                                            Applied for <span class="font-medium text-indigo-600 dark:text-indigo-400">Programming Course</span>
+                                            Applied for <span class="font-medium text-indigo-600 dark:text-indigo-400">Course</span>
                                         </p>
                                     </div>
                                     <div class="text-right">

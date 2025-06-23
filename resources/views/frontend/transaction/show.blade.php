@@ -72,13 +72,6 @@
                                 sebesar Rp {{ number_format($transaction->discount_amount, 0, ',', '.') }}
                             </p>
                         </div>
-                        <button onclick="this.parentElement.parentElement.remove()"
-                            class="text-blue-600 hover:text-blue-800">
-                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
                     </div>
                 </div>
             </div>
@@ -205,9 +198,23 @@
                     </div>
                     <div>
                         <h3 class="text-sm font-medium text-gray-500">Jumlah Pembayaran</h3>
-                        <p class="mt-1 text-lg font-semibold text-gray-900">
-                            Rp {{ number_format($transaction->amount, 0, ',', '.') }}
-                        </p>
+                        @if($transaction->discount_id)
+                            <div class="mt-1">
+                                <p class="text-sm text-gray-400 line-through">
+                                    Rp {{ number_format($transaction->amount + $transaction->discount_amount, 0, ',', '.') }}
+                                </p>
+                                <p class="text-lg font-semibold text-gray-900">
+                                    Rp {{ number_format($transaction->amount, 0, ',', '.') }}
+                                </p>
+                                <p class="text-xs text-green-600 font-medium">
+                                    Hemat Rp {{ number_format($transaction->discount_amount, 0, ',', '.') }}
+                                </p>
+                            </div>
+                        @else
+                            <p class="mt-1 text-lg font-semibold text-gray-900">
+                                Rp {{ number_format($transaction->amount, 0, ',', '.') }}
+                            </p>
+                        @endif
                     </div>
                 </div>
             </div>

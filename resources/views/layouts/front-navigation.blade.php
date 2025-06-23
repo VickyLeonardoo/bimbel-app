@@ -27,9 +27,9 @@
                     <x-nav-link :href="route('client.transaction.index')" :active="request()->routeIs('client.transaction.*')">
                         {{ __('Transaction') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('instructor.index')" :active="request()->routeIs('instructor.*')">
+                    {{-- <x-nav-link :href="route('instructor.index')" :active="request()->routeIs('instructor.*')">
                         {{ __('Attending') }}
-                    </x-nav-link>
+                    </x-nav-link> --}}
                 </div>
             </div>
 
