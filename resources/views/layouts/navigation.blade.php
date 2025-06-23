@@ -41,6 +41,11 @@
                     <x-nav-link :href="route('attendance.index')" :active="request()->routeIs('attendance.*')">
                         {{ __('Attending') }}
                     </x-nav-link>
+                    @role('admin')
+                    <x-nav-link :href="route('testimonial.index')" :active="request()->routeIs('testimonial.*')">
+                        {{ __('Testimonials') }}
+                    </x-nav-link>
+                    @endrole
                 </div>
             </div>
             

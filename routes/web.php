@@ -1,23 +1,32 @@
 <?php
 
-use App\Http\Controllers\AttendanceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\YearController;
+use App\Http\Controllers\PromoController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\VisiMisiController;
 use App\Http\Controllers\EducationController;
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\EnrollmentController;
-use App\Http\Controllers\Front\ChildrenController;
 use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\Front\ChildrenController;
 use App\Http\Controllers\Front\DashboardController;
 use App\Http\Controllers\Front\TransactionController;
-use App\Http\Controllers\PromoController;
-use App\Http\Controllers\TransactionController as ControllersTransactionController;
 use App\Http\Controllers\DashboardController as ControllersDashboardController;
+use App\Http\Controllers\TransactionController as ControllersTransactionController;
+use App\Http\Controllers\Front\TestimonialController as ControllersTestimonialController;
 
 
+Route::get('/testimonials/{id}', [TestimonialController::class, 'show'])->name('admin.testimonials.show');
+Route::post('/testimonials/{id}/toggle-visibility', [TestimonialController::class, 'toggleVisibility'])->name('admin.testimonials.toggle-visibility');
+Route::post('/testimonials/bulk-action', [TestimonialController::class, 'bulkAction'])->name('admin.testimonials.bulk-action');
+Route::delete('/testimonials/{id}', [TestimonialController::class, 'destroy'])->name('admin.testimonials.destroy');
+Route::get('/testimonials/stats', [TestimonialController::class, 'getStats'])->name('admin.testimonials.stats');
+
+Route::get('/client-testimonials-lists', [ControllersTestimonialController::class, 'index'])->name('testimonials.index');
 
 Route::post('/check-promo', [PromoController::class, 'checkPromo'])->name('check-promo');
 
@@ -37,6 +46,7 @@ Route::get('/about-us', function () {
 Route::get('/dashboard',[ControllersDashboardController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
+    Route::post('/testimonial', [ControllersTestimonialController::class, 'store'])->name('testimonial.store');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -91,6 +101,9 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/attendance/{course:id}/report', [AttendanceController::class, 'show_report'])
     ->name('attendance.report');
+
+    Route::resource('testimonial',TestimonialController::class)
+    ->middleware(['role:admin']);
 
 
     Route::prefix('client')->name('client.')->group(function () {

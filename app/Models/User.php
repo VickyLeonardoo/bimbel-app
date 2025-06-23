@@ -57,4 +57,9 @@ class User extends Authenticatable
     public function childs(){
         return $this->hasMany(Children::class);
     }
+
+    public function is_testimonials(): bool
+    {
+        return Testimonial::where('user_id', $this->id)->exists();
+    }
 }
