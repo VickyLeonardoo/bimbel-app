@@ -512,10 +512,10 @@
 
                 <!-- Call to Action Button -->
                 <div class="text-center mt-12" data-aos="fade-up">
-                    <button class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                    <a href="{{ route('testimonials.index') }}" class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                         Lihat Semua Ulasan
                         <i data-feather="arrow-right" class="inline h-5 w-5 ml-2"></i>
-                    </button>
+                    </a>
                 </div>
             </div>
 
