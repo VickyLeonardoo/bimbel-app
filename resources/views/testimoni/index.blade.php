@@ -43,7 +43,7 @@
                         </div>
                         <div class="ml-4">
                             <h3 class="text-lg font-semibold text-gray-900">{{ number_format($averageRating, 1) }}</h3>
-                            <p class="text-sm text-gray-600">Rating Rata-rata</p>
+                            <p class="text-sm text-gray-600">Average Rating</p>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                         </div>
                         <div class="ml-4">
                             <h3 class="text-lg font-semibold text-gray-900">{{ $publicCount }}</h3>
-                            <p class="text-sm text-gray-600">Ditampilkan</p>
+                            <p class="text-sm text-gray-600">Show in Public</p>
                         </div>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                         </div>
                         <div class="ml-4">
                             <h3 class="text-lg font-semibold text-gray-900">{{ $hiddenCount }}</h3>
-                            <p class="text-sm text-gray-600">Disembunyikan</p>
+                            <p class="text-sm text-gray-600">Hidden</p>
                         </div>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                         </div>
                         <div class="ml-4">
                             <h3 class="text-lg font-semibold text-gray-900">{{ $fiveStarPercentage }}%</h3>
-                            <p class="text-sm text-gray-600">Rating 5 Bintang</p>
+                            <p class="text-sm text-gray-600">Rate 5 Star</p>
                         </div>
                     </div>
                 </div>
@@ -134,13 +134,13 @@
                                     <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L12 12"/>
                                     </svg>
-                                    Sembunyikan
+                                    Hide
                                 @else
                                     <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                                     </svg>
-                                    Tampilkan
+                                    Show
                                 @endif
                             </button>
                         </div>

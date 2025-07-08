@@ -34,6 +34,8 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+Route::get('/',[DashboardController::class,'home'])->name('home');
+
 Route::get('/about-us', function () {
     return view('about');
 })->name('about');
@@ -44,9 +46,9 @@ Route::post('/testimonial', [ControllersTestimonialController::class, 'store'])-
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:357993683.
-Route::get('/dashboard',[ControllersDashboardController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard',[ControllersDashboardController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified','role:admin|instructor']);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -92,11 +94,11 @@ Route::middleware('auth')->group(function () {
     ->middleware(['role:admin|instructor']);
 
     Route::post('/attending/update-status',[AttendanceController::class, 'update_status'])
-    ->middleware(['role:admin'])
+    ->middleware(['role:admin|instructor'])
     ->name('attendance.update.status');
 
     Route::post('/attending/update-status',[AttendanceController::class, 'update_status'])
-    ->middleware(['role:admin'])
+    ->middleware(['role:admin|instructor'])
     ->name('attendance.update.status');
     
     Route::get('/attendance/{course:id}/report', [AttendanceController::class, 'show_report'])

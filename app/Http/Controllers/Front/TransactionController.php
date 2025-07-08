@@ -27,9 +27,15 @@ class TransactionController extends Controller
      */
     public function index()
     {
+        $check_done_payment = Transaction::where('user_id',auth()->user()->id)->where('status', 'Payment Receive')->first();
+        $visible_testimonial = false;
+        if ($check_done_payment) {
+            $visible_testimonial = true;
+        }
+
         $transactions = Transaction::where('user_id',auth()->user()->id)->paginate(10);
         // $transactions = Transaction::all();
-        return view('frontend.transaction.index',compact('transactions'));
+        return view('frontend.transaction.index',compact('transactions','visible_testimonial'));
     }
 
     /**

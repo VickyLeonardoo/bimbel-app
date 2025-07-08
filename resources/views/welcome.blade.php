@@ -142,8 +142,7 @@
                                 <i data-feather="target" class="h-8 w-8"></i>
                             </div>
                             <h3 class="text-2xl font-semibold text-gray-800 mb-4">Visi</h3>
-                            <p class="text-gray-600">Menjadi bimbingan belajar terdepan dalam mencetak generasi muda
-                                yang cerdas, berkarakter, dan siap menghadapi tantangan masa depan.</p>
+                            <p class="text-gray-600">{{ $visi_misi->where('type', 'Vision')->first()->name ?? '' }}</p>
                         </div>
                     </div>
 
@@ -156,10 +155,9 @@
                             </div>
                             <h3 class="text-2xl font-semibold text-gray-800 mb-4">Misi</h3>
                             <ul class="text-gray-600 text-left list-disc list-inside space-y-2">
-                                <li>Menyediakan metode pembelajaran yang efektif dan menyenangkan.</li>
-                                <li>Mengembangkan potensi akademik dan karakter siswa.</li>
-                                <li>Memberikan layanan pendidikan yang terjangkau dan berkualitas.</li>
-                                <li>Membantu siswa mencapai prestasi terbaik di sekolah dan ujian nasional.</li>
+                                @foreach ($visi_misi->where('type','Mission') as $misi)
+                                <li>{{ $misi->name }}</li>    
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -227,7 +225,8 @@
                     <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
                         <div class="text-center">
                             <div class="bg-blue-500 text-white p-4 rounded-xl inline-block mb-6">
-                                <i data-feather="divide-circle" class="h-8 w-8"></i>
+                                <i data-feather="book-open" class="h-8 w-8"></i>
+
                             </div>
                             <h3 class="text-2xl font-semibold text-gray-800 mb-4">Matematika</h3>
                             <p class="text-gray-600">Belajar matematika dengan metode yang mudah dipahami.</p>
@@ -238,7 +237,7 @@
                     <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
                         <div class="text-center">
                             <div class="bg-blue-500 text-white p-4 rounded-xl inline-block mb-6">
-                                <i data-feather="atom" class="h-8 w-8"></i>
+                                <i data-feather="book-open" class="h-8 w-8"></i>
                             </div>
                             <h3 class="text-2xl font-semibold text-gray-800 mb-4">Fisika</h3>
                             <p class="text-gray-600">Pahami konsep fisika dengan cara yang menyenangkan.</p>
@@ -249,7 +248,8 @@
                     <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
                         <div class="text-center">
                             <div class="bg-blue-500 text-white p-4 rounded-xl inline-block mb-6">
-                                <i data-feather="flask" class="h-8 w-8"></i>
+                                <i data-feather="book-open" class="h-8 w-8"></i>
+
                             </div>
                             <h3 class="text-2xl font-semibold text-gray-800 mb-4">Kimia</h3>
                             <p class="text-gray-600">Pelajari kimia dengan pendekatan praktis dan teoritis.</p>
@@ -280,13 +280,17 @@
 
                 <div class="grid md:grid-cols-3 gap-8">
                     <!-- Pengajar 1 -->
+                    @foreach ($instructors as $instructor)
                     <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group"
                         data-aos="fade-up" data-aos-delay="100">
                         <div class="text-center">
-                            <img src="{{ asset('asset/img/pengajar1.jpg') }}" alt="Pengajar 1"
+                            <img src="{{ Storage::url($instructor->photo) }}" alt="Pengajar 1"
                                 class="w-32 h-32 rounded-full mx-auto mb-6 object-cover">
-                            <h3 class="text-2xl font-semibold text-gray-800 mb-2">Budi Santoso</h3>
-                            <p class="text-gray-600">Matematika & Fisika</p>
+                            <h3 class="text-2xl font-semibold text-gray-800 mb-2">{{ $instructor->name }}</h3>
+                            @foreach ($instructor->educations as $edu)
+                            <p class="text-gray-600">{{ $edu->degree }} {{ $edu->university }}</p>
+                                
+                            @endforeach
                             <div class="mt-4 flex justify-center space-x-4">
                                 <a href="#" class="text-blue-500 hover:text-blue-600">
                                     <i data-feather="linkedin" class="h-5 w-5"></i>
@@ -297,198 +301,75 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Pengajar 2 -->
-                    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group"
-                        data-aos="fade-up" data-aos-delay="200">
-                        <div class="text-center">
-                            <img src="{{ asset('asset/img/pengajar2.jpg') }}" alt="Pengajar 2"
-                                class="w-32 h-32 rounded-full mx-auto mb-6 object-cover">
-                            <h3 class="text-2xl font-semibold text-gray-800 mb-2">Ani Wijaya</h3>
-                            <p class="text-gray-600">Bahasa Inggris & Sastra</p>
-                            <div class="mt-4 flex justify-center space-x-4">
-                                <a href="#" class="text-blue-500 hover:text-blue-600">
-                                    <i data-feather="linkedin" class="h-5 w-5"></i>
-                                </a>
-                                <a href="#" class="text-blue-500 hover:text-blue-600">
-                                    <i data-feather="mail" class="h-5 w-5"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pengajar 3 -->
-                    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group"
-                        data-aos="fade-up" data-aos-delay="300">
-                        <div class="text-center">
-                            <img src="{{ asset('asset/img/pengajar3.jpg') }}" alt="Pengajar 3"
-                                class="w-32 h-32 rounded-full mx-auto mb-6 object-cover">
-                            <h3 class="text-2xl font-semibold text-gray-800 mb-2">Cahyo Pratama</h3>
-                            <p class="text-gray-600">Kimia & Biologi</p>
-                            <div class="mt-4 flex justify-center space-x-4">
-                                <a href="#" class="text-blue-500 hover:text-blue-600">
-                                    <i data-feather="linkedin" class="h-5 w-5"></i>
-                                </a>
-                                <a href="#" class="text-blue-500 hover:text-blue-600">
-                                    <i data-feather="mail" class="h-5 w-5"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </section>
 
-        <!-- Section Testimoni -->
         <section id="testimoni" class="py-24 bg-gradient-to-br from-purple-50 to-pink-50">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-16" data-aos="fade-up">
                     <h2 class="text-4xl font-bold text-gray-800 mb-4">Testimoni Siswa</h2>
-                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">Dengarkan pengalaman siswa-siswa yang telah merasakan bimbingan belajar kami.</p>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                        Dengarkan pengalaman siswa-siswa yang telah merasakan bimbingan belajar kami.
+                    </p>
                 </div>
-
+        
+                @if($testimonials->count() > 0)
                 <!-- Carousel Container -->
-                <div x-data="testimonialCarousel()" x-init="startAutoplay()" class="relative max-w-6xl mx-auto">
+                <div x-data="testimonialCarousel({{ $testimonials->count() }})" x-init="startAutoplay()" class="relative max-w-6xl mx-auto">
                     <!-- Testimonial Cards -->
                     <div class="overflow-hidden rounded-2xl">
                         <div class="flex transition-transform duration-500 ease-in-out" :style="`transform: translateX(-${currentIndex * 100}%)`">
-                            <!-- Slide 1 -->
+                            
+                            @foreach($testimonials->chunk(2) as $chunkIndex => $testimonialChunk)
+                            <!-- Slide {{ $chunkIndex + 1 }} -->
                             <div class="w-full flex-shrink-0 px-4">
                                 <div class="grid md:grid-cols-2 gap-8">
-                                    <!-- Testimonial 1 -->
-                                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                                    @foreach($testimonialChunk as $testimonial)
+                                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300" 
+                                         data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
                                         <div class="flex items-center mb-6">
-                                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
-                                                AS
-                                            </div>
-                                            <div>
-                                                <h4 class="text-xl font-semibold text-gray-800">Andi Setiawan</h4>
-                                                <div class="flex text-yellow-400 mt-1">
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
+                                            @if($testimonial->avatar)
+                                                <img src="{{ Storage::url($testimonial->avatar) }}" 
+                                                     alt="{{ $testimonial->name }}" 
+                                                     class="w-16 h-16 rounded-full object-cover mr-4">
+                                            @else
+                                                <div class="w-16 h-16 bg-gradient-to-br {{ $testimonial->gradient_color ?? 'from-blue-500 to-purple-600' }} rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
+                                                    {{ $testimonial->initials }}
                                                 </div>
+                                            @endif
+                                            <div>
+                                                <h4 class="text-xl font-semibold text-gray-800">{{ $testimonial->name }}</h4>
+                                                <div class="flex text-yellow-400 mt-1">
+                                                    @for($i = 1; $i <= 5; $i++)
+                                                        <i data-feather="star" class="h-4 w-4 {{ $i <= $testimonial->rating ? 'fill-current' : '' }}"></i>
+                                                    @endfor
+                                                </div>
+                                                {{-- @if($testimonial->school)
+                                                    <p class="text-gray-500 text-sm mt-1">{{ $testimonial->school }}</p>
+                                                @endif --}}
                                             </div>
                                         </div>
-                                        <p class="text-gray-600 italic">"Bimbel Pintar benar-benar membantu saya memahami matematika dengan lebih mudah. Pengajarnya sabar dan metode pembelajarannya sangat efektif. Nilai saya meningkat drastis!"</p>
+                                        <p class="text-gray-600 italic">"{{ $testimonial->review }}"</p>
                                     </div>
-
-                                    <!-- Testimonial 2 -->
-                                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
-                                        <div class="flex items-center mb-6">
-                                            <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-red-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
-                                                SP
-                                            </div>
-                                            <div>
-                                                <h4 class="text-xl font-semibold text-gray-800">Sari Permata</h4>
-                                                <div class="flex text-yellow-400 mt-1">
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                </div>
-                                            </div>
+                                    @endforeach
+                                    
+                                    <!-- Jika jumlah testimoni dalam chunk ganjil, tambahkan card kosong -->
+                                    @if($testimonialChunk->count() == 1)
+                                    <div class="bg-white p-8 rounded-2xl shadow-lg opacity-50">
+                                        <div class="text-center text-gray-400 py-8">
+                                            <i data-feather="message-circle" class="h-12 w-12 mx-auto mb-4"></i>
+                                            <p>Testimoni lainnya akan segera hadir</p>
                                         </div>
-                                        <p class="text-gray-600 italic">"Kelas privat di sini sangat membantu. Pengajar fokus pada kelemahan saya dan memberikan latihan yang tepat. Sekarang saya lebih percaya diri menghadapi ujian."</p>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
-
-                            <!-- Slide 2 -->
-                            <div class="w-full flex-shrink-0 px-4">
-                                <div class="grid md:grid-cols-2 gap-8">
-                                    <!-- Testimonial 3 -->
-                                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
-                                        <div class="flex items-center mb-6">
-                                            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
-                                                RP
-                                            </div>
-                                            <div>
-                                                <h4 class="text-xl font-semibold text-gray-800">Rizki Pratama</h4>
-                                                <div class="flex text-yellow-400 mt-1">
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p class="text-gray-600 italic">"Try out rutin di Bimbel Pintar sangat membantu persiapan UTBK saya. Soal-soalnya berkualitas dan pembahasannya detail. Alhamdulillah lulus PTN impian!"</p>
-                                    </div>
-
-                                    <!-- Testimonial 4 -->
-                                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
-                                        <div class="flex items-center mb-6">
-                                            <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-yellow-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
-                                                DM
-                                            </div>
-                                            <div>
-                                                <h4 class="text-xl font-semibold text-gray-800">Desi Maharani</h4>
-                                                <div class="flex text-yellow-400 mt-1">
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p class="text-gray-600 italic">"Jadwal belajar yang fleksibel sangat cocok untuk saya yang sibuk dengan ekstrakurikuler. Pengajarnya juga ramah dan mudah dihubungi. Recommended banget!"</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Slide 3 -->
-                            <div class="w-full flex-shrink-0 px-4">
-                                <div class="grid md:grid-cols-2 gap-8">
-                                    <!-- Testimonial 5 -->
-                                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
-                                        <div class="flex items-center mb-6">
-                                            <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
-                                                FH
-                                            </div>
-                                            <div>
-                                                <h4 class="text-xl font-semibold text-gray-800">Fajar Hidayat</h4>
-                                                <div class="flex text-yellow-400 mt-1">
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p class="text-gray-600 italic">"Materi fisika dan kimia yang sulit jadi lebih mudah dipahami berkat metode pembelajaran di sini. Pengajarnya kompeten dan selalu siap membantu."</p>
-                                    </div>
-
-                                    <!-- Testimonial 6 -->
-                                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
-                                        <div class="flex items-center mb-6">
-                                            <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
-                                                LN
-                                            </div>
-                                            <div>
-                                                <h4 class="text-xl font-semibold text-gray-800">Luna Nabila</h4>
-                                                <div class="flex text-yellow-400 mt-1">
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                    <i data-feather="star" class="h-4 w-4 fill-current"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p class="text-gray-600 italic">"Bimbel Pintar tidak hanya meningkatkan nilai akademik saya, tapi juga membangun kepercayaan diri. Lingkungan belajarnya nyaman dan mendukung."</p>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
-
+        
                     <!-- Navigation Dots -->
                     <div class="flex justify-center mt-8 space-x-2">
                         <template x-for="(slide, index) in slides" :key="index">
@@ -498,8 +379,9 @@
                             </button>
                         </template>
                     </div>
-
-                    <!-- Navigation Arrows -->
+        
+                    <!-- Navigation Arrows (hanya tampil jika lebih dari 1 slide) -->
+                    @if($testimonials->chunk(2)->count() > 1)
                     <button @click="prevSlide()" 
                             class="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 text-gray-600 hover:text-blue-500">
                         <i data-feather="chevron-left" class="h-6 w-6"></i>
@@ -508,56 +390,71 @@
                             class="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 text-gray-600 hover:text-blue-500">
                         <i data-feather="chevron-right" class="h-6 w-6"></i>
                     </button>
+                    @endif
                 </div>
-
+        
                 <!-- Call to Action Button -->
                 <div class="text-center mt-12" data-aos="fade-up">
-                    <a href="{{ route('testimonials.index') }}" class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                    <a href="{{ route('testimonials.index') }}" 
+                       class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                         Lihat Semua Ulasan
                         <i data-feather="arrow-right" class="inline h-5 w-5 ml-2"></i>
                     </a>
                 </div>
+        
+                @else
+                <!-- Tampilan jika tidak ada testimoni -->
+                <div class="text-center py-16">
+                    <div class="max-w-md mx-auto">
+                        <i data-feather="message-circle" class="h-16 w-16 mx-auto mb-4 text-gray-400"></i>
+                        <h3 class="text-2xl font-semibold text-gray-600 mb-2">Belum Ada Testimoni</h3>
+                        <p class="text-gray-500">Testimoni siswa akan muncul di sini setelah mereka berbagi pengalaman.</p>
+                    </div>
+                </div>
+                @endif
             </div>
-
+        
             <script>
-                function testimonialCarousel() {
+                function testimonialCarousel(totalTestimonials) {
+                    const totalSlides = Math.ceil(totalTestimonials / 2);
+                    
                     return {
                         currentIndex: 0,
-                        slides: [0, 1, 2], // 3 slides total
+                        slides: Array.from({length: totalSlides}, (_, i) => i),
                         autoplayInterval: null,
-
+        
                         startAutoplay() {
-                            this.autoplayInterval = setInterval(() => {
-                                this.nextSlide();
-                            }, 5000); // Ganti slide setiap 5 detik
+                            if (this.slides.length > 1) {
+                                this.autoplayInterval = setInterval(() => {
+                                    this.nextSlide();
+                                }, 5000);
+                            }
                         },
-
+        
                         stopAutoplay() {
                             if (this.autoplayInterval) {
                                 clearInterval(this.autoplayInterval);
                             }
                         },
-
+        
                         nextSlide() {
                             this.currentIndex = (this.currentIndex + 1) % this.slides.length;
                         },
-
+        
                         prevSlide() {
                             this.currentIndex = this.currentIndex === 0 ? this.slides.length - 1 : this.currentIndex - 1;
                         },
-
+        
                         goToSlide(index) {
                             this.currentIndex = index;
                             this.stopAutoplay();
-                            // Restart autoplay after manual navigation
                             setTimeout(() => {
                                 this.startAutoplay();
                             }, 3000);
                         }
                     }
                 }
-
-                // Initialize feather icons when the component loads
+        
                 document.addEventListener('DOMContentLoaded', function() {
                     setTimeout(() => {
                         feather.replace();
@@ -565,7 +462,7 @@
                 });
             </script>
         </section>
-
+        
         <!-- Contact Section dengan Modern Cards -->
         <section id="kontak" class="py-24 bg-white">
             <div class="container mx-auto px-4">

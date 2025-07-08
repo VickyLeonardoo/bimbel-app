@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Discount;
+use App\Models\Transaction;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreDiscountRequest;
 use App\Http\Requests\UpdateDiscountRequest;
-use App\Models\Discount;
-use Illuminate\Http\Request;
 
 class DiscountController extends Controller
 {
@@ -140,6 +141,12 @@ class DiscountController extends Controller
      */
     public function destroy(Discount $discount)
     {
-        //
+        $transaction_check_discount = Transaction::where('discount_id', $discount->id)->first();
+        if ($transaction_check_discount) {
+            return redirect()->back()->with('error','Discount has transaction, You cannot delete the Discount');
+        }
+
+        $discount->delete();
+        return redirect()->route('discount.index')->with('success','Discount successfully deleted!');
     }
 }

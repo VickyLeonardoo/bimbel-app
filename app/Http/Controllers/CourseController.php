@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateCourseRequest;
 use App\Models\Course;
 use App\Models\Session;
 use App\Models\SessionCourse;
+use App\Models\TransactionItem;
 use App\Models\Year;
 use Illuminate\Http\Request;
 
@@ -86,6 +87,11 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
+        $transaction_item_check = TransactionItem::where('course_id', $course->id)->first();
+        if ($transaction_item_check) {
+            return redirect()->back()->with('error','Course has transaction item, You cannot delete the Course');
+        }
+
         $course->delete();
         return redirect()->back()->with('success','Course deleted successfully');
     }

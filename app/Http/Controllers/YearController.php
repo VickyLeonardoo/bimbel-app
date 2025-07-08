@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreYearRequest;
 use App\Http\Requests\UpdateYearRequest;
+use App\Models\Transaction;
 use App\Models\Year;
 use Illuminate\Http\Request;
 
@@ -97,6 +98,11 @@ class YearController extends Controller
      */
     public function destroy(Year $year)
     {
+        $transaction_check_year = Transaction::where('year_id', $year->id)->first();
+        if ($transaction_check_year) {
+            return redirect()->back()->with('error','Year has transaction, You cannot delete the Year');
+        }
+
         $year->delete();
         return redirect()->route('year.index')->with('success','Year successfully deleted.');
     }
