@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Course;
 use App\Models\Instructor;
 use App\Models\Testimonial;
 use App\Models\VisiMisi;
@@ -18,8 +19,8 @@ class DashboardController extends Controller
                                   ->orderBy('id', 'desc')
                                   ->limit(6) // Ambil 6 testimoni untuk ditampilkan dalam carousel
                                   ->get();
-        
-        return view('welcome', compact('visi_misi', 'instructors', 'testimonials'));
+        $courses = Course::all();
+        return view('welcome', compact('visi_misi', 'instructors', 'testimonials','courses'));
     }
 
     public function index(){

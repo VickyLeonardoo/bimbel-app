@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('children_id')->constrained();
             $table->foreignId('session_course_id')->constrained();
+            $table->foreignId('enrollment_id')->constrained();
             $table->enum('status',['Present','Absent','Late','Leave'])->nullable();
             $table->foreignId('year_id')->constrained();
             $table->boolean('is_active')->default(true);

@@ -73,27 +73,30 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $enrollment->children->name }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $enrollment->course->name }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $enrollment->created_at->addHours(8)->format('d M Y H:i') }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-3">
-                                <div class="flex items-center space-x-3">
-                                    <a href="{{ route('enrollments.edit', $enrollment) }}" 
-                                        class="text-indigo-600 hover:text-indigo-900 transition-colors">
-                                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                                            <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
-                                        </svg>
-                                    </a>
-                                    <form action="{{ route('enrollments.destroy', $enrollment) }}" method="POST" class="inline-block">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                @if($enrollment->status == 'Approved') 
+                                    <form action="" method="POST">
                                         @csrf
-                                        @method('DELETE')
-                                        <button type="submit" 
-                                            class="text-red-600 hover:text-red-900 transition-colors"
-                                            onclick="return confirm('Are you sure you want to delete this enrollment?')">
-                                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                        @method('PUT')
+                                        <button type="submit" class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-800/30 dark:text-green-400 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+                                            <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                             </svg>
+                                            Active
                                         </button>
                                     </form>
-                                </div>
+                                @else
+                                    <form action="" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <button type="submit" class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-800/30 dark:text-red-400 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+                                            <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            Inactive
+                                        </button>
+                                    </form>
+                                @endif
                             </td>
                         </tr>
                         @empty

@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up(): void 
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('discount_id')->nullable()->constrained();
             $table->float('discount_amount',15,2)->nullable(); 
             $table->text('payment_image')->nullable();
-            $table->enum('status',['Draft','Pending','Payment Receive','Canceled'])->default('Draft');
+            $table->enum('status',['Draft', 'Pending', 'Payment Receive', 'Cancelled'])->default('Draft');
             $table->boolean('is_active')->default(true);
             $table->softDeletes();
             $table->timestamps(); 

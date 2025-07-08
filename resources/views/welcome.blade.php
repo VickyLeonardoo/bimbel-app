@@ -221,51 +221,18 @@
                 </div>
 
                 <div class="grid md:grid-cols-4 gap-8">
-                    <!-- Matematika -->
+                    @foreach ($courses as $course)
                     <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
                         <div class="text-center">
                             <div class="bg-blue-500 text-white p-4 rounded-xl inline-block mb-6">
                                 <i data-feather="book-open" class="h-8 w-8"></i>
 
                             </div>
-                            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Matematika</h3>
-                            <p class="text-gray-600">Belajar matematika dengan metode yang mudah dipahami.</p>
+                            <h3 class="text-2xl font-semibold text-gray-800 mb-4">{{$course->name}}</h3>
+                            <p class="text-gray-600">{{ $course->description }}</p>
                         </div>
                     </div>
-
-                    <!-- Fisika -->
-                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
-                        <div class="text-center">
-                            <div class="bg-blue-500 text-white p-4 rounded-xl inline-block mb-6">
-                                <i data-feather="book-open" class="h-8 w-8"></i>
-                            </div>
-                            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Fisika</h3>
-                            <p class="text-gray-600">Pahami konsep fisika dengan cara yang menyenangkan.</p>
-                        </div>
-                    </div>
-
-                    <!-- Kimia -->
-                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
-                        <div class="text-center">
-                            <div class="bg-blue-500 text-white p-4 rounded-xl inline-block mb-6">
-                                <i data-feather="book-open" class="h-8 w-8"></i>
-
-                            </div>
-                            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Kimia</h3>
-                            <p class="text-gray-600">Pelajari kimia dengan pendekatan praktis dan teoritis.</p>
-                        </div>
-                    </div>
-
-                    <!-- Bahasa Inggris -->
-                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="400">
-                        <div class="text-center">
-                            <div class="bg-blue-500 text-white p-4 rounded-xl inline-block mb-6">
-                                <i data-feather="book-open" class="h-8 w-8"></i>
-                            </div>
-                            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Bahasa Inggris</h3>
-                            <p class="text-gray-600">Tingkatkan kemampuan bahasa Inggris Anda dengan cepat.</p>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </section>
