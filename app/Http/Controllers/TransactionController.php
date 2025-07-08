@@ -72,7 +72,7 @@ class TransactionController extends Controller
             // Create enrollments and attendances
             foreach ($transaction->items as $tr) {
                 // Create enrollment
-                Enrollment::create([
+                $enrollment = Enrollment::create([
                     'transaction_id' => $transaction->id,
                     'course_id' => $tr->course_id,
                     'year_id' => $transaction->year_id,
@@ -88,6 +88,7 @@ class TransactionController extends Controller
                         'session_course_id' => $session->id,
                         'year_id' => $transaction->year_id,
                         'grade' => $tr->children->grade,
+                        'enrollment_id' => $enrollment->id
                     ]);
                 }
             }

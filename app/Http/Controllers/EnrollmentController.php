@@ -48,7 +48,16 @@ class EnrollmentController extends Controller
 
         return view('enrollment.index', compact('enrollments'));
     }
-
+    public function update_enrollment(Enrollment $enrollment) {
+        // Ubah status enrollment
+        $enrollment->status = 'Cancelled';
+        $enrollment->save();
+    
+        // Nonaktifkan semua attendance
+        $enrollment->attendance()->update(['is_active' => false]);
+    
+        return redirect()->back()->with('success', 'Enrollment Cancelled');
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -86,7 +95,25 @@ class EnrollmentController extends Controller
      */
     public function update(Request $request, Enrollment $enrollment)
     {
-        //
+
+        if ($enrollment->status == 'Approved'){
+            // Ubah status enrollment
+            $enrollment->status = 'Cancelled';
+            $enrollment->save();
+        
+            // Nonaktifkan semua attendance
+            $enrollment->attendance()->update(['is_active' => false]);
+        }
+        else {
+            // Ubah status enrollment
+         $enrollment->status = 'Approved';
+         $enrollment->save();
+     
+         // Nonaktifkan semua attendance
+         $enrollment->attendance()->update(['is_active' => true]);
+         }
+     
+         return redirect()->back()->with('success', 'Enrollment Cancelled');
     }
 
     /**

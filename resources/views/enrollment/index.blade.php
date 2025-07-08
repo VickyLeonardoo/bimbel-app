@@ -71,13 +71,13 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $loop->iteration }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $enrollment->transaction->transaction_no }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $enrollment->children->name }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $enrollment->course->name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $enrollment->status }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $enrollment->created_at->addHours(8)->format('d M Y H:i') }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 @if($enrollment->status == 'Approved') 
-                                    <form action="" method="POST">
-                                        @csrf
+                                    <form action="{{ route('enrollments.update',$enrollment) }}" method="POST">
                                         @method('PUT')
+                                        @csrf
                                         <button type="submit" class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-800/30 dark:text-green-400 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
                                             <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
@@ -86,9 +86,9 @@
                                         </button>
                                     </form>
                                 @else
-                                    <form action="" method="POST">
-                                        @csrf
+                                    <form action="{{ route('enrollments.update',$enrollment) }}" method="POST">
                                         @method('PUT')
+                                        @csrf
                                         <button type="submit" class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-800/30 dark:text-red-400 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
                                             <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
